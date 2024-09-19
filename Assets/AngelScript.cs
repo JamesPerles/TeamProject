@@ -22,29 +22,29 @@ public class AngelScript : MonoBehaviour
     
     void Update()
     {
-        Vector2 vel = RB.velocity;
+        Vector2 vel = new Vector2();
         //Damn it's been a while since I did any coding so I'm kinda rusty on how to do movement
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             vel.y = 5;
         }
         
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             vel.x = -5;
         }
         
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             vel.y = -5;
         }
         
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             vel.x = 5;
         }
         
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             //Fire laser or other projectile somehow
         }
