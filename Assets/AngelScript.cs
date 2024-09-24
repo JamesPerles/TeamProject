@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AngelScript : MonoBehaviour
 {
+    public int MaxHealth = 5;
+    public int health;
     public Rigidbody2D RB;
     public AudioSource AS;
     public AudioClip A1;
@@ -12,11 +14,11 @@ public class AngelScript : MonoBehaviour
     public AudioClip B1;
     public AudioClip B2;
     public AudioClip B3;
-    
+
     //To James, no definitive amount of sounds needed yet, placeholders for now
     void Start()
     {
-        
+        health = MaxHealth;
     }
 
     

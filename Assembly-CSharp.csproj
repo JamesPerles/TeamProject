@@ -45,7 +45,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.18f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Code\LevelProgress.cs" />
     <Compile Include="Assets\AngelScript.cs" />
+    <Compile Include="Assets\Code\Level1.cs" />
+    <Compile Include="Assets\Code\EnemySpawning.cs" />
     <Compile Include="Assets\ReticleScript.cs" />
     <Compile Include="Assets\ProjScript.cs" />
     <Reference Include="UnityEngine">
