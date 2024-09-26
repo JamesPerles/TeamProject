@@ -16,6 +16,7 @@ public class Level1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        return;
         if (LP.Level != 1) return; //if the player isn't on level one then dont do anything
         if (LP.CurrentProgress >= 90f && !SpawnedAlready[4]) SpawnedAlready[4] = true; //Spawn Boss
         else if (LP.CurrentProgress >= 70f && !SpawnedAlready[3]) SpawnedAlready[3] = true; //Spawn Enemies
