@@ -10,6 +10,9 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/AngelScript.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2mGhaxeEKcZDiUPq3OFaXnk2h9w" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -33,6 +36,7 @@
       <updated>1726708889882</updated>
       <workItem from="1726708894306" duration="43000" />
       <workItem from="1726708999008" duration="6000" />
+      <workItem from="1727392064379" duration="240000" />
     </task>
     <servers />
   </component>

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DiamondScript : MonoBehaviour
+
 {
+    private 
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,7 @@ public class DiamondScript : MonoBehaviour
         //{
             //vel.y = -5;
         //} 
-        transform.Translate(.4f * Time.deltaTime, -1, -1);
+        transform.Velocity(.4f * Time.deltaTime, -1, -1);
         //Found on https://discussions.unity.com/t/how-to-make-an-object-move-constantly-como-hacer-para-que-un-objeto-se-mueva-constantemente/839129
         //I want to replace with my own code
 
