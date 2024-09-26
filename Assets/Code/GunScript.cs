@@ -28,6 +28,7 @@ public class GunScript : MonoBehaviour
             GameObject bullet = Instantiate(BulletPrefab, ShotLocation.transform.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().velocity = (Reticle.transform.position - ShotLocation.transform.position).normalized * BulletSpeed;
             timer = ShotCooldown;
+            //This shoots the projectile
         }
     }
 }

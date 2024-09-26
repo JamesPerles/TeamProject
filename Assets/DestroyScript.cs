@@ -22,6 +22,6 @@ public class DestroyScript : MonoBehaviour
         //{
             //Destroy(collision.gameObject);
             //}
-        Destroy(collision.gameObject);
+        Destroy(collision.gameObject); //Destroy other object, if it doesn't already work like that.
     }
 }
