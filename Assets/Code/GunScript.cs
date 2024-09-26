@@ -6,6 +6,7 @@ public class GunScript : MonoBehaviour
 {
     private ReticleScript RS;
     private  GameObject Reticle;
+    public GameObject PivotPoint;
     public GameObject BulletPrefab;
     public GameObject ShotLocation;
     public float ShotCooldown = .25f;
