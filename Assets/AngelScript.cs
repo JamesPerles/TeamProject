@@ -56,7 +56,7 @@ public class AngelScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy") // Collision with an enemy
+        if (collision.gameObject.CompareTag("EnemyBullet")) // Collision with an enemy
         {
             health -= 1; // Reduce health by 1
 
