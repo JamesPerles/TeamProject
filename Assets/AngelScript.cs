@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // For scene management
 
 public class AngelScript : MonoBehaviour
 {
@@ -57,6 +56,17 @@ public class AngelScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Enemy") // Collision with an enemy
+        {
+            health -= 1; // Reduce health by 1
+
+            if (health <= 0)
+            {
+                // Load GameOver scene when health reaches 0
+                SceneManager.LoadScene("GameOver");
+            }
+        }
+
         if (collision.gameObject.tag == "Hazard")
         {   
             //Destroy(collision.gameObject);      We also need to incorporate the player angel slowing down every time he gets hurt.
