@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
     public Text scoreText; // Reference to the UI text displaying the score
 
      //Call this method to increase the score when an enemy is killed
-  / public void AddScore(int points)
+   public void AddScore(int points)
     {
        score += points;  // Add points to the score
        UpdateScoreText(); // Update the UI (if using)
