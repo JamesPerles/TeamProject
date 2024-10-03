@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class LevelProgress : MonoBehaviour
@@ -14,6 +15,7 @@ public class LevelProgress : MonoBehaviour
     public Vector3 BG1Pos;
     public Vector3 BG2Pos;
     public bool Moving = false; //if the player is currently moving through the level
+    public GameObject EnemyPrefab;
 
     private AngelScript AS;
     public GameObject Background1;
@@ -23,21 +25,19 @@ public class LevelProgress : MonoBehaviour
     {
         AS = FindObjectOfType<AngelScript>();
         Level = 1;
-        Moving = false;
         CurrentProgress = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!Moving && Input.anyKeyDown) Moving = true;
         if (Moving) //when the player is going through the level, wont happen when fighting a boss for example
         {
             CurrentProgress += currentSpeed * Time.deltaTime;
             if (CurrentProgress > 100f) //level has been completed
             {
-                Level++; //go to the next level
-                AS.health = AS.MaxHealth; //reset player health
-                if (Level > TotalLevels) Application.Quit();
+                SceneManager.LoadScene("GameWin");
             }
             Vector3 newPos = Background1.transform.position;
             newPos.y = newPos.y - (BackgroundSpeed * Time.deltaTime);
@@ -53,5 +53,17 @@ public class LevelProgress : MonoBehaviour
                 Background2 = temp;
             }
         }
+    }
+
+
+    public IEnumerator SpawnEnemies(Vector3 Position, int amount, float delay)
+    {
+        while (amount > 0)
+        {
+            Instantiate(EnemyPrefab, Position, Quaternion.identity);
+            amount -= 1;
+            yield return new WaitForSeconds(delay);
+        }
+        yield break;
     }
 }

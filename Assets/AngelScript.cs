@@ -5,6 +5,10 @@ public class AngelScript : MonoBehaviour
 {
     public int MaxHealth = 5;
     public int health;
+    public float speed = 5f;
+    public Sprite Blood1;
+    public Sprite Blood2;
+    public Sprite Blood3;
     public Rigidbody2D RB;
     public AudioSource AS;
     public AudioClip A1;
@@ -27,22 +31,22 @@ public class AngelScript : MonoBehaviour
         //Damn it's been a while since I did any coding so I'm kinda rusty on how to do movement
         if (Input.GetKey(KeyCode.W))
         {
-            vel.y = 5;
+            vel.y = speed;
         }
         
         if (Input.GetKey(KeyCode.A))
         {
-            vel.x = -5;
+            vel.x = -speed;
         }
         
         if (Input.GetKey(KeyCode.S))
         {
-            vel.y = -5;
+            vel.y = -speed;
         }
         
         if (Input.GetKey(KeyCode.D))
         {
-            vel.x = 5;
+            vel.x = speed;
         }
         
         if (Input.GetKey(KeyCode.Space))
@@ -59,7 +63,7 @@ public class AngelScript : MonoBehaviour
         if (collision.gameObject.CompareTag("EnemyBullet")) // Collision with an enemy
         {
             health -= 1; // Reduce health by 1
-
+            Destroy(collision.gameObject);
             if (health <= 0)
             {
                 // Load GameOver scene when health reaches 0
