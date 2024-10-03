@@ -19,11 +19,22 @@ public class DiamondScript : MonoBehaviour
     public float projectileSpeed = 10f; // Speed of the projectile
     public float projectileLifetime = 5f; // Lifetime of the projectile
 
+    // Audio for destruction and projectile
+    public AudioSource audioSource; // Reference to the AudioSource component
+    public AudioClip destroySound; // The destruction sound effect
+    public AudioClip projectileSound; // The projectile firing sound effect
+
     void Start()
     {
         AS = FindObjectOfType<AngelScript>();
         player = GameObject.FindGameObjectWithTag("Player").transform; // Find the player by tag
         nextFireTime = Time.time; // Initialize next fire time
+
+        // Ensure AudioSource is attached
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>(); // Automatically add AudioSource if missing
+        }
     }
 
     void Update()
@@ -72,6 +83,12 @@ public class DiamondScript : MonoBehaviour
                 rb.velocity = direction * projectileSpeed; // Set the projectile velocity
             }
 
+            // Play the projectile firing sound
+            if (audioSource != null && projectileSound != null)
+            {
+                audioSource.PlayOneShot(projectileSound);
+            }
+
             // Destroy the projectile after its lifetime
             Destroy(projectile, projectileLifetime);
         }
@@ -82,23 +99,32 @@ public class DiamondScript : MonoBehaviour
         // Check for collision with the player
         if (collision.gameObject.CompareTag("Player"))
         {
-
+            // Handle player collision
         }
 
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            Destroy(collision.gameObject);
-            Health--;
+            Destroy(collision.gameObject); // Destroy the bullet
+            Health--; // Decrease enemy health
+
             if (Health <= 0)
             {
+                // Spawn blood splatter effect
                 GameObject temp = Instantiate(BloodPrefab, transform.position, Quaternion.identity);
-                int rand = Random.Range(1, 4); //get a random number so the blood splatter has a random sprite when spawned
-                Debug.Log(rand);
+                int rand = Random.Range(1, 4); // Random blood sprite
                 if (rand == 1) temp.GetComponent<SpriteRenderer>().sprite = AS.Blood1;
                 if (rand == 2) temp.GetComponent<SpriteRenderer>().sprite = AS.Blood2;
                 if (rand == 3) temp.GetComponent<SpriteRenderer>().sprite = AS.Blood3;
-                Destroy(gameObject); // Destroy the enemy on collision with the bullet
+
+                // Play the destruction sound effect
+                if (audioSource != null && destroySound != null)
+                {
+                    audioSource.PlayOneShot(destroySound); // Play death sound
+                }
+
+                // Delay the destruction of the game object to allow the sound to play
+                Destroy(gameObject, destroySound.length); // Wait for the sound duration before destroying
             }
         }
     }
-}
+    }

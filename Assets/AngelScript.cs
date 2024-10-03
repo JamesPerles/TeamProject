@@ -18,74 +18,85 @@ public class AngelScript : MonoBehaviour
     public AudioClip B2;
     public AudioClip B3;
 
-    //To James, no definitive amount of sounds needed yet, placeholders for now
+    public AudioClip deathSound; // Sound effect for when health reaches zero
+
+    // To James, no definitive amount of sounds needed yet, placeholders for now
     void Start()
     {
         health = MaxHealth;
     }
 
-    
     void Update()
     {
         Vector2 vel = new Vector2();
-        //Damn it's been a while since I did any coding so I'm kinda rusty on how to do movement
-        if (Input.GetKey(KeyCode.W))
+
+        // WASD movement
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             vel.y = speed;
         }
-        
-        if (Input.GetKey(KeyCode.A))
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             vel.x = -speed;
         }
-        
-        if (Input.GetKey(KeyCode.S))
+
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             vel.y = -speed;
         }
-        
-        if (Input.GetKey(KeyCode.D))
+
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             vel.x = speed;
         }
-        
+
         if (Input.GetKey(KeyCode.Space))
         {
-            //Fire laser or other projectile somehow
+            // Fire laser or other projectile somehow
         }
-        
+
         RB.velocity = vel;
-        //All code in this section was reused from Swingo's Speedrun, with Misha's help 
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("EnemyBullet")) // Collision with an enemy
+        if (collision.gameObject.CompareTag("EnemyBullet")) // Collision with an enemy bullet
         {
             health -= 1; // Reduce health by 1
             Destroy(collision.gameObject);
+
             if (health <= 0)
             {
-                // Load GameOver scene when health reaches 0
-                SceneManager.LoadScene("GameOver");
+                PlayDeathSound(); // Play death sound effect
+                Invoke("LoadGameOverScene", deathSound.length); // Load GameOver scene after sound
             }
         }
 
         if (collision.gameObject.tag == "Hazard")
-        {   
-            //Destroy(collision.gameObject);      We also need to incorporate the player angel slowing down every time he gets hurt.
+        {
+            // Handle hazard collisions (slow down player, etc.)
         }
-        
+
         if (collision.gameObject.name == "LevelEnd")
-        {   
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        {
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
-        //These lines were also reused from Swingo's Speedrun. Thank you Misha!
-        //Need a little help on movement
-        
     }
-    
-    //COMING SOON: Enemy movement properties, scrolling background, halo reticle and aiming system.
-    //Christian, we also need a projectile sprite
-    
+
+    // Play the death sound effect when health reaches zero
+    void PlayDeathSound()
+    {
+        if (AS != null && deathSound != null)
+        {
+            AS.PlayOneShot(deathSound); // Play the death sound effect
+        }
+    }
+
+    // Load the GameOver scene after the death sound plays
+    void LoadGameOverScene()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
 }
+
