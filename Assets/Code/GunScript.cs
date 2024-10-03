@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GunScript : MonoBehaviour
@@ -28,7 +26,12 @@ public class GunScript : MonoBehaviour
             GameObject bullet = Instantiate(BulletPrefab, ShotLocation.transform.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().velocity = (Reticle.transform.position - ShotLocation.transform.position).normalized * BulletSpeed;
             timer = ShotCooldown;
+
             //This shoots the projectile
         }
+        //Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 rot = new Vector3(0f, 0f, Mathf.Atan2(mouse.y, mouse.x) * Mathf.Rad2Deg);
+        //Quaternion rot2 = Quaternion.AngleAxis(rot.z, Vector3.forward);
+        //PivotPoint.transform.rotation = rot2;
     }
 }
