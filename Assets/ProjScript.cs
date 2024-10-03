@@ -26,17 +26,18 @@ public class ProjScript : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Destroyer")
         {   
-            //Destroy(collision.gameObject);
-            //Also, this needs to destroy the enemy of course
+            Destroy(collision.gameObject);
+            //This is supposed to destroy any stray projectiles
         }
         
-        if (collision.gameObject.tag == "Terrain")
-        {   
+        //if (collision.gameObject.tag == "Terrain")
+        //{   
             //Destroy(collision.gameObject);
             //This just deletes the proj to prevent pre-emptive killing
-        }
+        //}
+        //Redundant part
         
         if (collision.gameObject.tag == "Hazard")
         {   
